@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="WpfApp1.UserControls.FabricMaterialUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WpfApp1.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="800">
+    <Border BorderThickness="1.4" BorderBrush="#bb0c07" Margin="5">
+        <Grid Background="#fef9de">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35*"/>
+                <RowDefinition Height="402*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="61*"/>
+                <ColumnDefinition Width="196*"/>
+                <ColumnDefinition Width="530*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="ArticlText" Text="AY@!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBox x:Name="MaterialTB" Text="Материал Название" Grid.Column="1" Margin="5,0,0,0"
+                     Style="{StaticResource SimpleTB}" IsReadOnly="True"
+                       HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <DockPanel Grid.Column="2" Margin="5,0,0,0">
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Материала на складе: "/>
+                    <TextBox x:Name="MaterialCountTB" Text="1000" 
+                             Style="{StaticResource SimpleTB}" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Цена : "/>
+                    <TextBox x:Name="MaterialPriceTB" Text="1000"
+                             Style="{StaticResource SimpleTB}" IsReadOnly="True"/>
+                    <TextBlock Text="р за: "/>
+                    <TextBlock x:Name="MaterialTypeTB" Text="шт"/>
+                </StackPanel>
+            </DockPanel>
+            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2">
+                <Image x:Name="MaterialImage"/>
+            </Border>
+            <StackPanel  Grid.Column="3" Grid.Row="1" Margin="5 5 0 0" VerticalAlignment="Bottom" >
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Материала сделан по : "/>
+                    <TextBox x:Name="MaterialGHOSTTB" Text="ГОСТ - 1234"
+                             Style="{StaticResource SimpleTB}" IsReadOnly="True"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <TextBlock Text="Вес материала за еденицу : "/>
+                    <TextBox x:Name="MaterialMassTB" Text="0.045"
+                             Style="{StaticResource SimpleTB}" IsReadOnly="True"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel  Grid.Column="3" Grid.Row="1" Margin="5 5 0 0" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                    <TextBlock Text="Цех: "/>
+                    <TextBlock x:Name="WarehousesTB" Text="Первый"/>
+                </StackPanel>
+                <Button x:Name="EditComponent" Content="Редактировать материал" Margin="2"/>
+                <Button x:Name="SaveComponent" Content="Сохранить изменения" Margin="2" Visibility="Hidden"/>
+                <Button x:Name="DelComponent" Background="#bb0c07" Content="Удалить материал" Margin="2"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+
+</UserControl>

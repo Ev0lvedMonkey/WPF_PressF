@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="85b956a77a8c4030b3d4c5f56e41a5aa" Name="Diagram1">
+        <EntityTypeShape EntityType="FactoryModel.ComponentsType" Width="1.5" PointX="0.75" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.EmployeeOperations" Width="1.5" PointX="10" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Employees" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.EquipmentFailures" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.FailureReasons" Width="1.5" PointX="0.75" PointY="29.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.FMaterial" Width="1.5" PointX="3" PointY="17.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.MaterialsType" Width="1.5" PointX="0.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.MComponents" Width="1.5" PointX="3" PointY="25.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Operations" Width="1.5" PointX="7.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Order" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.OrderStatus" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.OrderStatusHistory" Width="1.5" PointX="5.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.ProductionStages" Width="1.5" PointX="8.75" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.QualityChecks" Width="1.5" PointX="8.25" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.QualityParameters" Width="1.5" PointX="6" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Role" Width="1.5" PointX="1.5" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Specifications" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Suppliers" Width="1.5" PointX="0.75" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.sysdiagrams" Width="1.5" PointX="3.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.UnitType" Width="1.5" PointX="0.75" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.User" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.UserImage" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="FactoryModel.Warehouses" Width="1.5" PointX="0.75" PointY="22.625" IsExpanded="true" />
+        <AssociationConnector Association="FactoryModel.FK_MComponents_ComponentsType" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_EmployeeOperations_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_EmployeeOperations_Operation" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_EquipmentFailures_Master" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_EquipmentFailures_Reason" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_FMaterial_MaterialsType" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_FMaterial_UnitType" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Materials_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Materials_Warehouses" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Specifications_Materials" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Components_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Components_Warehouses" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_MComponents_UnitType" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Specifications_Components" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Orders_Manager" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Orders_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_OrderStatusHistory_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_QualityChecks_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Specifications_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_OrderStatusHistory_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_QualityChecks_Parameter" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_Users_Roles" ManuallyRouted="false" />
+        <AssociationConnector Association="FactoryModel.FK_UserImage_Users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,53 @@
+﻿<Page x:Class="WpfApp1.Pages.Lists.MaterialComponentsList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages.Lists"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="MaterialComponentsList">
+    <Grid Background="#f3cc8d">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="12*"/>
+            <RowDefinition Height="121*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="0,5,0,0">
+            <TextBlock Text="Материалы и комопненты" FontSize="27" HorizontalAlignment="Left"/>
+            <Button Content="Выйти" HorizontalAlignment="Right" Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
+        </DockPanel>
+        <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
+            <ScrollViewer HorizontalScrollBarVisibility="Disabled">
+                <WrapPanel Name="MaterialComponentsWP" ItemHeight="250" ItemWidth="800"/>
+            </ScrollViewer>
+        </Border>
+        <DockPanel Grid.Row="2">
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3">
+                <TextBlock Text="Отображать: "/>
+                <ComboBox Name="SelectShowCB" SelectionChanged="SelectShowCB_SelectionChanged">
+                    <ComboBoxItem Content="Всё"/>
+                    <ComboBoxItem Content="Материалы"/>
+                    <ComboBoxItem Content="Компоненты"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Width="100">
+                <TextBlock Text="Цех: "/>
+                <ComboBox Name="WarehousesCB" SelectionChanged="WarehousesCB_SelectionChanged">
+                    <ComboBoxItem Content="Все"/>
+                    <ComboBoxItem Content="Первый"/>
+                    <ComboBoxItem Content="Второй"/>
+                    <ComboBoxItem Content="Третий"/>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="3">
+                <TextBlock Name ="CompPosAmountText" Text="Всего компонентов: 999"/>
+                <TextBlock Name ="MatPosAmoutText" Text="Всего материалов: 999"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Center" Margin="3">
+                <TextBlock Name ="TotalPosAmountText" Text="Всего позиций: 999"/>
+                <TextBlock Name ="TotalPrice" Text="Общая стоимость: 1000000"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</Page>
