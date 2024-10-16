@@ -20,7 +20,7 @@ namespace WpfApp1
         public static User CurrentUser { get; private set; }
         public static string CurrentUserRole { get; private set; }
 
-        public enum Roles { Customer, Director, Manager, Master, Сonstructor}
+        public enum Roles { Заказчик, Директор, Менеджер, Мастер, Конструктор }
 
 
         protected override void OnStartup(StartupEventArgs e)

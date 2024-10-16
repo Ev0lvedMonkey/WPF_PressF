@@ -20,18 +20,18 @@
 
             <TextBlock x:Name="ArticlText" Text="AY@!" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <TextBox x:Name="CompTB" Text="Компонент Название" Grid.Column="1" Margin="5,0,0,0"
-                 Style="{StaticResource SimpleTB}" IsReadOnly="True"
-                   HorizontalAlignment="Left" VerticalAlignment="Center" TextChanged="MaterialTB_TextChanged"/>
+                 Style="{StaticResource SimpleTB}" IsReadOnly="True" HorizontalAlignment="Left"
+                     VerticalAlignment="Center" LostFocus="CompTB_LostFocus"/>
             <DockPanel Grid.Column="2" Margin="5,0,0,0">
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
                     <TextBlock Text="Компонентов на складе: "/>
-                    <TextBox x:Name="CompCountTB" Text="1000" 
-                         Style="{StaticResource SimpleTB}" IsReadOnly="True" TextChanged="CompCountTB_TextChanged"/>
+                    <TextBox x:Name="CompCountTB" Text="1000" PreviewTextInput="TB_PreviewTextInput"
+                         Style="{StaticResource SimpleTB}" IsReadOnly="True" LostFocus="CompCountTB_LostFocus"/>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
                     <TextBlock Text="Цена : "/>
-                    <TextBox x:Name="CompPriceTB" Text="1000"
-                         Style="{StaticResource SimpleTB}" IsReadOnly="True" TextChanged="CompPriceTB_TextChanged"/>
+                    <TextBox x:Name="CompPriceTB" Text="1000" PreviewTextInput="TB_PreviewTextInput"
+                         Style="{StaticResource SimpleTB}" IsReadOnly="True" LostFocus="CompPriceTB_LostFocus"/>
                     <TextBlock Text="р за: "/>
                     <TextBlock x:Name="CompTypeTB" Text="шт"/>
                 </StackPanel>
@@ -43,8 +43,8 @@
 
                 <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
                     <TextBlock Text="Вес компонента за еденицу : "/>
-                    <TextBox x:Name="CompMassTB" Text="0.045"
-                         Style="{StaticResource SimpleTB}" IsReadOnly="True" TextChanged="CompMassTB_TextChanged"/>
+                    <TextBox x:Name="CompMassTB" Text="0.045" PreviewTextInput="TB_PreviewTextInput"
+                         Style="{StaticResource SimpleTB}" IsReadOnly="True" LostFocus="CompMassTB_LostFocus"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel  Grid.Column="3" Grid.Row="1" Margin="5 5 0 0" VerticalAlignment="Top" HorizontalAlignment="Right" >
@@ -52,9 +52,9 @@
                     <TextBlock Text="Цех: "/>
                     <TextBlock x:Name="WarehousesTB" Text="Первый"/>
                 </StackPanel>
-                <Button x:Name="SaveComponentBtn" Visibility="Hidden"
-                        Content="Сохранить изменения" Margin="2" Click="SaveComponentBtn_Click" />
-                <Button x:Name="DelComponentBtn" Background="#bb0c07" Content="Удалить материал" Margin="2" Visibility="Hidden"/>
+                <Button x:Name="DelComponentBtn" Background="#bb0c07"
+                        Content="Удалить материал" Margin="2" Visibility="Hidden"
+                        Click="DelComponentBtn_Click"/>
             </StackPanel>
         </Grid>
     </Border>

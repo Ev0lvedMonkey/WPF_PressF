@@ -34,7 +34,7 @@ namespace WpfApp1.Pages.Lists
 
         private void InitStartComponentsState()
         {
-            SelectShowCB.SelectedIndex = 0;
+            SelectShowCB.SelectedIndex = 2;
             WarehousesCB.SelectedIndex = 0;
         }
 
@@ -74,7 +74,7 @@ namespace WpfApp1.Pages.Lists
             CompPosAmountText.Text = $"Всего компонентов: {_componentsList.Count}";
             MatPosAmoutText.Text = $"Всего материалов: {_materialList.Count}";
             TotalPosAmountText.Text = $"Всего позиций: {_componentsList.Count + _materialList.Count}";
-            TotalPrice.Text = $"Общая стоимость: {_componentsList.Sum(p => p.Price) + _materialList.Sum(p => p.Price)}";
+            TotalPrice.Text = $"Общая стоимость: {_componentsList.Sum(p => p.Price * p.Quantity) + _materialList.Sum(p => p.Price * p.Quantity)}";
             Debug.WriteLine("Calculated");
         }
 

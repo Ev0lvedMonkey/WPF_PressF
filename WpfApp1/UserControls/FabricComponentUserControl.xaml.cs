@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,26 +23,25 @@ namespace WpfApp1.UserControls
     public partial class FabricComponentUserControl : UserControl
     {
         private MComponents _component;
-        private bool _canUseBtn;
-        private Action OnTextFieldsChanged;
         public FabricComponentUserControl(MComponents component)
         {
+            _component = component;
             InitializeComponent();
             OnNullCheck();
             UserRoleCheck();
-
-            OnTextFieldsChanged += () => { SaveComponentBtn.Visibility = Visibility.Visible; };
-            if (_canUseBtn)
-                DelComponentBtn.Visibility = Visibility.Visible;
             UpdateComponentsText();
         }
 
         private void UserRoleCheck()
         {
-            if (App.CurrentUserRole == App.Roles.Director.ToString()
-                || App.CurrentUserRole == App.Roles.Manager.ToString())
+            if (App.CurrentUserRole == App.Roles.Директор.ToString()
+                || App.CurrentUserRole == App.Roles.Менеджер.ToString())
             {
-                _canUseBtn = true;
+                DelComponentBtn.Visibility = Visibility.Visible;
+                CompCountTB.IsReadOnly = false;
+                CompTB.IsReadOnly = false;
+                CompMassTB.IsReadOnly = false;
+                CompPriceTB.IsReadOnly = false;
             }
         }
 
@@ -58,34 +58,67 @@ namespace WpfApp1.UserControls
             CompTB.Text = _component.Name;
             CompCountTB.Text = _component.Quantity.ToString();
             CompPriceTB.Text = _component.Price.ToString();
-            CompTypeTB.Text = App.DB.ComponentsType.FirstOrDefault(x => x.ID == _component.ComponentTypeID).Name;
+            CompTypeTB.Text = App.DB.UnitType.FirstOrDefault(x => x.ID == _component.UnitTypeID).Name;
             WarehousesTB.Text = App.DB.Warehouses.FirstOrDefault(x => x.WarehouseID == _component.WarehouseID).WarehouseName;
             CompMassTB.Text = _component.Weight.ToString();
         }
 
-        private void SaveComponentBtn_Click(object sender, RoutedEventArgs e)
+
+        private void TB_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            SaveComponentBtn.Visibility = Visibility.Hidden;
+            if (!char.IsDigit(e.Text, 0))
+                e.Handled = true;
         }
 
-        private void MaterialTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void CompTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            OnTextFieldsChanged.Invoke();
+            _component.Name = CompTB.Text;
+            App.DB.SaveChanges();
+
         }
 
-        private void CompCountTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void CompCountTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            OnTextFieldsChanged.Invoke();
+            _component.Quantity = int.Parse(CompCountTB.Text);
+            App.DB.SaveChanges();
         }
 
-        private void CompPriceTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void CompMassTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            OnTextFieldsChanged.Invoke();
+            _component.Weight = decimal.Parse(CompMassTB.Text);
+            App.DB.SaveChanges();
         }
 
-        private void CompMassTB_TextChanged(object sender, TextChangedEventArgs e)
+        private void CompPriceTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            OnTextFieldsChanged.Invoke();
+            _component.Price = decimal.Parse(CompPriceTB.Text);
+            App.DB.SaveChanges();
+        }
+
+        private void DelComponentBtn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult result =
+                MessageBox.Show("Вы уверены, что хотите удалить запись?", "Подтверждение удаления",
+                MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                App.DB.MComponents.Remove(_component);
+                App.DB.SaveChanges();
+
+                MessageBox.Show("Запись успешно удалена.", "Удаление", MessageBoxButton.OK);
+                NavigateTo(App.GetRightPage());
+            }
+        }
+
+        private void NavigateTo(object content)
+        {
+            Window window = Window.GetWindow(this);
+
+            if (window == null)
+                return;
+            Frame mainFrame = LogicalTreeHelper.FindLogicalNode(window, "MainFrame") as Frame;
+            mainFrame?.Navigate(content);
         }
     }
 }
