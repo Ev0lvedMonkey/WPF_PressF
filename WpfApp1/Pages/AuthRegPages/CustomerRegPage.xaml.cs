@@ -27,8 +27,11 @@ namespace WpfApp1.Pages.AuthRegPages
         private const string Pattern2 = @"[A-ZА-Я]";
         private const string Pattern3 = @"\d";
 
-        public CustomerRegPage()
+        private bool _isFromAuth;
+
+        public CustomerRegPage(bool isFromAuth)
         {
+            _isFromAuth = isFromAuth;
             InitializeComponent();
         }
 
@@ -40,13 +43,22 @@ namespace WpfApp1.Pages.AuthRegPages
             {
                 MessageBox.Show(stringBuilder.ToString());
                 stringBuilder.Clear();
+                return;
             }
             else
             {
-                CretaeNewCustomer();
-                NavigationService.Navigate(new CustomerPage());
-                MainWindow.Instance.SetUserFullName();
-                MainWindow.Instance.OpenComponets();
+                if (!_isFromAuth)
+                {
+                    CretaeNewCustomer();
+                    NavigationService.Navigate(new NewOrderRegPage());
+                }
+                else
+                {
+                    CretaeNewCustomer();
+                    NavigationService.Navigate(new CustomerPage());
+                    MainWindow.Instance.SetUserFullName();
+                    MainWindow.Instance.OpenComponets();
+                }
             }
         }
 
@@ -63,7 +75,8 @@ namespace WpfApp1.Pages.AuthRegPages
 
             };
             App.DB.User.Add(newCustomerUser);
-            App.SetNewUser(newCustomerUser);
+            if (_isFromAuth)
+                App.SetNewUser(newCustomerUser);
             App.DB.SaveChanges();
         }
 
@@ -92,5 +105,8 @@ namespace WpfApp1.Pages.AuthRegPages
                 return true;
             else return false;
         }
+
+        private void ExitBtn_Click(object sender, RoutedEventArgs e) =>
+            NavigationService.GoBack();
     }
 }

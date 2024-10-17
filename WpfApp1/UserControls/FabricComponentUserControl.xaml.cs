@@ -107,18 +107,8 @@ namespace WpfApp1.UserControls
                 App.DB.SaveChanges();
 
                 MessageBox.Show("Запись успешно удалена.", "Удаление", MessageBoxButton.OK);
-                NavigateTo(App.GetRightPage());
+                MainWindow.Instance.Navigate(App.GetRightPage());
             }
-        }
-
-        private void NavigateTo(object content)
-        {
-            Window window = Window.GetWindow(this);
-
-            if (window == null)
-                return;
-            Frame mainFrame = LogicalTreeHelper.FindLogicalNode(window, "MainFrame") as Frame;
-            mainFrame?.Navigate(content);
         }
     }
 }

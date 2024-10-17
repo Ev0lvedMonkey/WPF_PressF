@@ -34,7 +34,7 @@ namespace WpfApp1.Pages.Lists
 
         private void InitStartComponentsState()
         {
-            SelectShowCB.SelectedIndex = 2;
+            SelectShowCB.SelectedIndex = 0;
             WarehousesCB.SelectedIndex = 0;
         }
 
@@ -91,30 +91,19 @@ namespace WpfApp1.Pages.Lists
                     _componentsList = _componentsList?.Where(x => x.WarehouseID == 2).ToList();
                     break;
                 case 3:
-                    _materialList =_materialList?.Where(x => x.WarehouseID == 3).ToList();
+                    _materialList = _materialList?.Where(x => x.WarehouseID == 3).ToList();
                     _componentsList = _componentsList?.Where(x => x.WarehouseID == 3).ToList();
                     break;
             }
         }
 
-        private void DrawList(List list)
-        {
+        private void ExitBtn_Click(object sender, RoutedEventArgs e) =>
+            NavigationService.Navigate(App.GetRightPage());
 
-        }
-
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
-
-        private void SelectShowCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        private void SelectShowCB_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             UpdateList();
-        }
 
-        private void WarehousesCB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
+        private void WarehousesCB_SelectionChanged(object sender, SelectionChangedEventArgs e) =>
             UpdateList();
-        }
     }
 }

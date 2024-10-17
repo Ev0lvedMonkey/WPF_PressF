@@ -19,11 +19,10 @@ namespace WpfApp1.Database
         {
             this.OrderStatusHistory = new HashSet<OrderStatusHistory>();
             this.QualityChecks = new HashSet<QualityChecks>();
-            this.Specifications = new HashSet<Specifications>();
+            this.OrderSpecifications = new HashSet<OrderSpecifications>();
         }
     
         public int OrderID { get; set; }
-        public string OrderNumber { get; set; }
         public System.DateTime OrderDate { get; set; }
         public string OrderName { get; set; }
         public Nullable<int> CustomerID { get; set; }
@@ -40,6 +39,6 @@ namespace WpfApp1.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<QualityChecks> QualityChecks { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Specifications> Specifications { get; set; }
+        public virtual ICollection<OrderSpecifications> OrderSpecifications { get; set; }
     }
 }

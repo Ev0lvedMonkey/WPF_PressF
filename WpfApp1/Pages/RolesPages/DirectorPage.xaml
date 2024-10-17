@@ -12,6 +12,8 @@
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button x:Name="ToEmployeeListBtn" Content="Учет работников" Click="ToEmployeeListBtn_Click" Margin="5"/>
             <Button x:Name="ToMaterialsAndComponentsListBtn" Content="Материалы и компоненты" Margin="5" Click="ToMaterialsAndComponentsListBtn_Click"/>
+            <Button x:Name="ToWarehousesPageBtn" Content="Планы цехов" Margin="5" Click="ToWarehousesPageBtn_Click"/>
+            <Button x:Name="ToOrderBtn" Content="Заказы клиентов" Margin="5" Click="ToOrderBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>

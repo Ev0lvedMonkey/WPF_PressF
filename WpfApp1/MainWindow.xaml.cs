@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Navigation;
 using WpfApp1.Pages;
 
@@ -47,6 +48,8 @@ namespace WpfApp1
                 $"{userRole} {App.CurrentUser.LastName} {App.CurrentUser.FirstName} {App.CurrentUser.Patronymic}";;
             UserFullNameText.Text = userFullName;
         }
+
+        public void Navigate(Page page) => MainFrame.NavigationService.Navigate(page);
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e)
         {

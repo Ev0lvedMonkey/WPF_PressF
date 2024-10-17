@@ -17,7 +17,7 @@ namespace WpfApp1.Database
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FMaterial()
         {
-            this.Specifications = new HashSet<Specifications>();
+            this.OrderSpecifications = new HashSet<OrderSpecifications>();
         }
     
         public int MaterialID { get; set; }
@@ -38,6 +38,6 @@ namespace WpfApp1.Database
         public virtual Suppliers Suppliers { get; set; }
         public virtual Warehouses Warehouses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Specifications> Specifications { get; set; }
+        public virtual ICollection<OrderSpecifications> OrderSpecifications { get; set; }
     }
 }

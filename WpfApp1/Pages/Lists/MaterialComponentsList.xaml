@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <DockPanel Margin="0,5,0,0">
             <TextBlock Text="Материалы и комопненты" FontSize="27" HorizontalAlignment="Left"/>
-            <Button Content="Выйти" HorizontalAlignment="Right" Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
+            <Button Content="Назад" HorizontalAlignment="Right" Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
         </DockPanel>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">

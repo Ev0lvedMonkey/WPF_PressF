@@ -36,5 +36,15 @@ namespace WpfApp1.Pages.RolesPages
         {
             NavigationService.Navigate(new MaterialComponentsList());
         }
+
+        private void ToWarehousesPageBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new WarehousesPage());
+        }
+
+        private void ToOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
+        }
     }
 }

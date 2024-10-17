@@ -51,7 +51,7 @@ namespace WpfApp1.Pages
 
         private void CustomerRegBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new CustomerRegPage());
+            NavigationService.Navigate(new CustomerRegPage(true));
         }
     }
 }

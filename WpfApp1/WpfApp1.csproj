@@ -109,6 +109,9 @@
     <Compile Include="Database\Order.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\OrderSpecifications.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\OrderStatus.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -125,9 +128,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Specifications.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Suppliers.cs">
@@ -148,8 +148,20 @@
     <Compile Include="Database\Warehouses.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AuthRegPages\NewOrderRegPage.xaml.cs">
+      <DependentUpon>NewOrderRegPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Lists\MaterialComponentsList.xaml.cs">
       <DependentUpon>MaterialComponentsList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Lists\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\WarehousesPage.xaml.cs">
+      <DependentUpon>WarehousesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PopUps\DefaultWarehousePopUp.xaml.cs">
+      <DependentUpon>DefaultWarehousePopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\EmployeeUserControl.xaml.cs">
       <DependentUpon>EmployeeUserControl.xaml</DependentUpon>
@@ -159,6 +171,9 @@
     </Compile>
     <Compile Include="UserControls\FabricMaterialUserControl.xaml.cs">
       <DependentUpon>FabricMaterialUserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\OrderUserControl.xaml.cs">
+      <DependentUpon>OrderUserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -180,11 +195,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AuthRegPages\NewOrderRegPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Lists\EmployeesList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Lists\MaterialComponentsList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Lists\OrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -208,6 +231,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\WarehousesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PopUps\DefaultWarehousePopUp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\EmployeeUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -217,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\FabricMaterialUserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\OrderUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +319,18 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\WarehousesResources\DefaultLayouts\FisrtD_LO.png" />
+    <Resource Include="Resources\WarehousesResources\DefaultLayouts\SecondD_LO.png" />
+    <Resource Include="Resources\WarehousesResources\DefaultLayouts\ThirdD_LO.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesIcons\Equipment.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesIcons\Exit.jpg" />
+    <Resource Include="Resources\WarehousesResources\WarehousesIcons\FireKit.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesIcons\FirstKit.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesLayouts\ThirdWh.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesLayouts\SecondWH.png" />
+    <Resource Include="Resources\WarehousesResources\WarehousesLayouts\FirstWH.png" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Database\Model1.Context.tt">

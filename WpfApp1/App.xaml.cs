@@ -16,7 +16,7 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
-        public static FactoryDBEntities DB = new FactoryDBEntities();
+        public static FactoryDataEntities DB = new FactoryDataEntities();
         public static User CurrentUser { get; private set; }
         public static string CurrentUserRole { get; private set; }
 
@@ -55,7 +55,10 @@ namespace WpfApp1
         public static void LoadUserSettings()
         {
             if (WpfApp1.Properties.Settings.Default.UserID != 0)
+            {
                 CurrentUser = DB.User.FirstOrDefault(x => x.UserID == WpfApp1.Properties.Settings.Default.UserID);
+                CurrentUserRole = DB.Role.FirstOrDefault(x => x.RoleID == CurrentUser.RoleID).RoleName;
+            }
         }
 
         public static void ClearUserSettings()

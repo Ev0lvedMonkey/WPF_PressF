@@ -35,9 +35,7 @@ namespace WpfApp1.Pages.Lists
                 EmployeesWP.Children.Add(new EmployeeUserControl(employee));
         }
 
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack();
-        }
+        private void ExitBtn_Click(object sender, RoutedEventArgs e) =>
+            NavigationService.Navigate(App.GetRightPage());
     }
 }

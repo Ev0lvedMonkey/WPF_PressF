@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Pages.Lists;
 
 namespace WpfApp1.Pages.RolesPages
 {
@@ -24,6 +25,11 @@ namespace WpfApp1.Pages.RolesPages
         {
             InitializeComponent();
             MainWindow.Instance.SetUserFullName();
+        }
+
+        private void ToOrderBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage());
         }
     }
 }

@@ -12,18 +12,13 @@ namespace WpfApp1.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Specifications
+    public partial class OrderSpecifications
     {
         public int SpecificationID { get; set; }
         public int OrderID { get; set; }
         public Nullable<int> MaterialID { get; set; }
         public Nullable<int> ComponentID { get; set; }
         public int Quantity { get; set; }
-        public string Drawing { get; set; }
-        public string Dimension { get; set; }
-        public string Equipment { get; set; }
-        public Nullable<int> OperationTime { get; set; }
-        public string Description { get; set; }
     
         public virtual FMaterial FMaterial { get; set; }
         public virtual MComponents MComponents { get; set; }

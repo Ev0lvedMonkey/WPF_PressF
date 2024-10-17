@@ -10,7 +10,9 @@
 
     <Grid Background="#f3cc8d">
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-            <Button x:Name="ToMaterialsAndComponentsListBtn" Content="Материалы и компоненты" Margin="5" Click="ToMaterialsAndComponentsListBtn_Click"/>
+            <Button x:Name="ToMaterialsAndComponentsListBtn" Content="Материалы и компоненты"
+                    Margin="5" Click="ToMaterialsAndComponentsListBtn_Click"/>
+            <Button x:Name="ToOrderBtn" Content="Заказы клиентов" Margin="5" Click="ToOrderBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>
