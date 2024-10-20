@@ -30,6 +30,7 @@ namespace WpfApp1.Database
         public Nullable<int> Cost { get; set; }
         public Nullable<System.DateTime> PlannedCompletionDate { get; set; }
         public Nullable<int> ManagerID { get; set; }
+        public string Description { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Database;
@@ -81,6 +82,7 @@ namespace WpfApp1.Pages.AuthRegPages
                     Cost = int.Parse(OrderPriceTB.Text),
                 };
                 App.DB.Order.Add(newOrder);
+                CreateOrderSpecif(newOrder.OrderID);
                 MessageBox.Show($"Добавлен заказ менеджером {newOrder.OrderName}");
             }
             if (App.CurrentUserRole == App.Roles.Заказчик.ToString())
@@ -96,10 +98,63 @@ namespace WpfApp1.Pages.AuthRegPages
                     Cost = int.Parse(OrderPriceTB.Text),
                 };
                 App.DB.Order.Add(newOrder);
+                CreateOrderSpecif(newOrder.OrderID);
                 MessageBox.Show($"Добавлен заказ заказчиком {newOrder.OrderName}");
 
             }
             App.DB.SaveChanges();
+        }
+
+        private void CreateOrderSpecif(int orderId)
+        {
+
+            OrderSpecifications neworderSpecifications = new OrderSpecifications
+            {
+                OrderID = orderId,
+                MaterialID = GetMaterialID(),
+                ComponentID = GetComponentsID(),
+                Quantity = GetQuantity()
+            };
+            App.DB.OrderSpecifications.Add(neworderSpecifications);
+        }
+
+        private int? GetComponentsID()
+        {
+            int totalComponents = App.DB.MComponents.Count();
+            Random random = new Random();
+            int randomIndex = random.Next(0, totalComponents);
+
+            var randomComponent = App.DB.MComponents
+                .OrderBy(m => m.ComponentID)
+                .Skip(randomIndex)
+                .FirstOrDefault();
+
+            if (randomComponent != null)
+                return randomComponent.ComponentID;
+            else return 0;
+        }
+
+        private int GetQuantity()
+        {
+            Random random = new Random();
+
+            return random.Next(1, 10);
+        }
+
+        private int? GetMaterialID()
+        {
+            int totalMaterials = App.DB.FMaterial.Count();
+            Random random = new Random();
+            int randomIndex = random.Next(0, totalMaterials);
+
+            var randomMaterial = App.DB.FMaterial
+                .OrderBy(m => m.MaterialID)
+                .Skip(randomIndex)
+                .FirstOrDefault();
+
+            if (randomMaterial != null)
+                return randomMaterial.MaterialID;
+            else return 0;
         }
 
         private bool CheckTextFields(StringBuilder stringBuilder)

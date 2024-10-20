@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Хранилище FactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="Хранилище FactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ComponentsType">
           <Key>
             <PropertyRef Name="ID" />
@@ -41,6 +41,14 @@
           <Property Name="FailureReasonID" Type="int" Nullable="false" />
           <Property Name="FailureDate" Type="datetime" Nullable="false" />
           <Property Name="MasterID" Type="int" Nullable="false" />
+          <Property Name="FixDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EquipName" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="FailureReasons">
           <Key>
@@ -109,6 +117,7 @@
           <Property Name="Cost" Type="int" />
           <Property Name="PlannedCompletionDate" Type="date" />
           <Property Name="ManagerID" Type="int" />
+          <Property Name="Description" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="OrderSpecifications">
           <Key>
@@ -267,6 +276,18 @@
             </Principal>
             <Dependent Role="EmployeeOperations">
               <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentFailures_Equipment">
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="1" />
+          <End Role="EquipmentFailures" Type="Self.EquipmentFailures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipments">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="EquipmentFailures">
+              <PropertyRef Name="EquipmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -515,6 +536,7 @@
           <EntitySet Name="EmployeeOperations" EntityType="Self.EmployeeOperations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EquipmentFailures" EntityType="Self.EquipmentFailures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FailureReasons" EntityType="Self.FailureReasons" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FMaterial" EntityType="Self.FMaterial" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MaterialsType" EntityType="Self.MaterialsType" Schema="dbo" store:Type="Tables" />
@@ -549,6 +571,10 @@
           <AssociationSet Name="FK_EmployeeOperations_Operation" Association="Self.FK_EmployeeOperations_Operation">
             <End Role="Operations" EntitySet="Operations" />
             <End Role="EmployeeOperations" EntitySet="EmployeeOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentFailures_Equipment" Association="Self.FK_EquipmentFailures_Equipment">
+            <End Role="Equipments" EntitySet="Equipments" />
+            <End Role="EquipmentFailures" EntitySet="EquipmentFailures" />
           </AssociationSet>
           <AssociationSet Name="FK_EquipmentFailures_Master" Association="Self.FK_EquipmentFailures_Master">
             <End Role="User" EntitySet="User" />
@@ -631,8 +657,7 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -676,8 +701,18 @@
           <Property Name="FailureReasonID" Type="Int32" Nullable="false" />
           <Property Name="FailureDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Equipments" Relationship="Self.FK_EquipmentFailures_Equipment" FromRole="EquipmentFailures" ToRole="Equipments" />
           <NavigationProperty Name="User" Relationship="Self.FK_EquipmentFailures_Master" FromRole="EquipmentFailures" ToRole="User" />
           <NavigationProperty Name="FailureReasons" Relationship="Self.FK_EquipmentFailures_Reason" FromRole="EquipmentFailures" ToRole="FailureReasons" />
+          <Property Name="FixDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="EquipmentID" />
+          </Key>
+          <Property Name="EquipmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EquipName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EquipmentFailures" Relationship="Self.FK_EquipmentFailures_Equipment" FromRole="Equipments" ToRole="EquipmentFailures" />
         </EntityType>
         <EntityType Name="FailureReasons">
           <Key>
@@ -759,6 +794,7 @@
           <Property Name="Cost" Type="Int32" />
           <Property Name="PlannedCompletionDate" Type="DateTime" Precision="0" />
           <Property Name="ManagerID" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_Orders_Customers" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="Self.FK_Orders_Manager" FromRole="Order" ToRole="User" />
           <NavigationProperty Name="OrderStatus" Relationship="Self.FK_Orders_Status" FromRole="Order" ToRole="OrderStatus" />
@@ -934,6 +970,18 @@
             </Principal>
             <Dependent Role="EmployeeOperations">
               <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EquipmentFailures_Equipment">
+          <End Role="Equipments" Type="Self.Equipments" Multiplicity="1" />
+          <End Role="EquipmentFailures" Type="Self.EquipmentFailures" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipments">
+              <PropertyRef Name="EquipmentID" />
+            </Principal>
+            <Dependent Role="EquipmentFailures">
+              <PropertyRef Name="EquipmentID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1189,11 +1237,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FactoryDataEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FactoryDataBaseEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ComponentsType" EntityType="Self.ComponentsType" />
           <EntitySet Name="EmployeeOperations" EntityType="Self.EmployeeOperations" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
           <EntitySet Name="EquipmentFailures" EntityType="Self.EquipmentFailures" />
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" />
           <EntitySet Name="FailureReasons" EntityType="Self.FailureReasons" />
           <EntitySet Name="FMaterial" EntityType="Self.FMaterial" />
           <EntitySet Name="MaterialsType" EntityType="Self.MaterialsType" />
@@ -1224,6 +1273,10 @@
           <AssociationSet Name="FK_EmployeeOperations_Operation" Association="Self.FK_EmployeeOperations_Operation">
             <End Role="Operations" EntitySet="Operations" />
             <End Role="EmployeeOperations" EntitySet="EmployeeOperations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EquipmentFailures_Equipment" Association="Self.FK_EquipmentFailures_Equipment">
+            <End Role="Equipments" EntitySet="Equipments" />
+            <End Role="EquipmentFailures" EntitySet="EquipmentFailures" />
           </AssociationSet>
           <AssociationSet Name="FK_EquipmentFailures_Master" Association="Self.FK_EquipmentFailures_Master">
             <End Role="User" EntitySet="User" />
@@ -1315,7 +1368,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище FactoryModelContainer" CdmEntityContainer="FactoryDataEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FactoryModelContainer" CdmEntityContainer="FactoryDataBaseEntities">
           <EntitySetMapping Name="ComponentsType">
             <EntityTypeMapping TypeName="FactoryModel.ComponentsType">
               <MappingFragment StoreEntitySet="ComponentsType">
@@ -1348,11 +1401,20 @@
           <EntitySetMapping Name="EquipmentFailures">
             <EntityTypeMapping TypeName="FactoryModel.EquipmentFailures">
               <MappingFragment StoreEntitySet="EquipmentFailures">
+                <ScalarProperty Name="FixDate" ColumnName="FixDate" />
                 <ScalarProperty Name="FailureID" ColumnName="FailureID" />
                 <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
                 <ScalarProperty Name="FailureReasonID" ColumnName="FailureReasonID" />
                 <ScalarProperty Name="FailureDate" ColumnName="FailureDate" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="FactoryModel.Equipments">
+              <MappingFragment StoreEntitySet="Equipments">
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="EquipName" ColumnName="EquipName" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1427,6 +1489,7 @@
                 <ScalarProperty Name="Cost" ColumnName="Cost" />
                 <ScalarProperty Name="PlannedCompletionDate" ColumnName="PlannedCompletionDate" />
                 <ScalarProperty Name="ManagerID" ColumnName="ManagerID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

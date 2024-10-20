@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfApp1.Database;
 using WpfApp1.Pages.Lists;
 
 namespace WpfApp1.Pages.RolesPages
@@ -34,7 +35,12 @@ namespace WpfApp1.Pages.RolesPages
 
         private void ToOrderBtn_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new OrdersPage());
+           NavigationService.Navigate(new OrdersPage());
+        }
+
+        private void ToEquipmentFailuresBtn_Click(object sender, RoutedEventArgs e)
+        {
+           NavigationService.Navigate(new EquipmentFailuresList());
         }
     }
 }

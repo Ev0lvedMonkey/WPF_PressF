@@ -12,17 +12,18 @@ namespace WpfApp1.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class EquipmentFailures
+    public partial class Equipments
     {
-        public int FailureID { get; set; }
-        public int EquipmentID { get; set; }
-        public int FailureReasonID { get; set; }
-        public System.DateTime FailureDate { get; set; }
-        public int MasterID { get; set; }
-        public Nullable<System.DateTime> FixDate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Equipments()
+        {
+            this.EquipmentFailures = new HashSet<EquipmentFailures>();
+        }
     
-        public virtual Equipments Equipments { get; set; }
-        public virtual User User { get; set; }
-        public virtual FailureReasons FailureReasons { get; set; }
+        public int EquipmentID { get; set; }
+        public string EquipName { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EquipmentFailures> EquipmentFailures { get; set; }
     }
 }

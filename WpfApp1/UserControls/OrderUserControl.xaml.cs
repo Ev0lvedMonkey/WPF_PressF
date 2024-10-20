@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -94,6 +95,41 @@ namespace WpfApp1.UserControls
             MainWindow.Instance.Navigate(new OrdersPage());
         }
 
+        private void DeductionOfComponentMaterials()
+        {
+            OrderSpecifications orderSpecifications = App.DB.OrderSpecifications.FirstOrDefault(x => x.OrderID == _order.OrderID);
+            int? usingMaterialID = orderSpecifications.MaterialID;
+            int? usingComponentID = orderSpecifications.ComponentID;
+            int? usingComponentQuantity = orderSpecifications.Quantity;
+
+            FMaterial usingMaterial = App.DB.FMaterial.FirstOrDefault(x => x.MaterialID == usingMaterialID);
+            MComponents usingComponent = App.DB.MComponents.FirstOrDefault(x => x.ComponentID == usingComponentID);
+
+
+            if ((usingMaterial.Quantity -= 1) >= 0)
+            {
+                usingMaterial.Quantity -= 1;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show($"На складе\n" +
+                    $"Материла {usingMaterial.Name} - {usingMaterial.Quantity} {usingMaterial.UnitType.Name}");
+                return;
+            }
+            if ((usingComponent.Quantity -= usingComponentQuantity) >= 0)
+            {
+                usingComponent.Quantity -= usingComponentQuantity;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show($"На складе\n" +
+                    $"Компонентов {usingComponent.Name} - {usingComponent.Quantity} {usingComponent.UnitType.Name}");
+                return;
+            }
+        }
+
         private void GetOrderBtn_Click(object sender, RoutedEventArgs e)
         {
             _order.ManagerID = App.CurrentUser.UserID;
@@ -103,8 +139,12 @@ namespace WpfApp1.UserControls
         private void DelOrderBtn_Click(object sender, RoutedEventArgs e) =>
             ChangeOrderStatus(2);
 
-        private void SendToProdBtn_Click(object sender, RoutedEventArgs e) =>
+        private void SendToProdBtn_Click(object sender, RoutedEventArgs e)
+        {
+            DeductionOfComponentMaterials();
             ChangeOrderStatus(6);
+        }
+
 
         private void CloseOrderBtn_Click(object sender, RoutedEventArgs e) =>
             ChangeOrderStatus(9);
@@ -117,6 +157,6 @@ namespace WpfApp1.UserControls
 
         private void ConfirmOrderReadinessBtn_Click(object sender, RoutedEventArgs e) =>
             ChangeOrderStatus(8);
-        
+
     }
 }

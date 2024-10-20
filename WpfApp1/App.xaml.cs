@@ -16,7 +16,7 @@ namespace WpfApp1
     /// </summary>
     public partial class App : Application
     {
-        public static FactoryDataEntities DB = new FactoryDataEntities();
+        public static FactoryDataBaseEntities DB = new FactoryDataBaseEntities();
         public static User CurrentUser { get; private set; }
         public static string CurrentUserRole { get; private set; }
 
