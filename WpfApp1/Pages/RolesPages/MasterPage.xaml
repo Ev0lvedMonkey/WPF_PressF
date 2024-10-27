@@ -13,6 +13,7 @@
             <Button x:Name="ToMaterialsAndComponentsListBtn" Content="Материалы и компоненты" Margin="5"
                     Click="ToMaterialsAndComponentsListBtn_Click"/>
             <Button x:Name="ToOrderBtn" Content="Заказы клиентов" Margin="5" Click="ToOrderBtn_Click"/>
+            <Button x:Name="ToEquipmentFailuresBtn" Content="История поломок оборудования" Margin="5" Click="ToEquipmentFailuresBtn_Click"/>
         </StackPanel>
     </Grid>
 </Page>

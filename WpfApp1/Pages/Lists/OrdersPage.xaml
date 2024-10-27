@@ -17,7 +17,7 @@
             <TextBlock Text="Заказы" FontSize="27" HorizontalAlignment="Left"/>
             <Button Content="Оформить заказ" HorizontalAlignment="Right"
                     Name="NewOrderBtn" Click="NewOrderBtn_Click" Visibility="Hidden"/>
-            <Button Content="Назад" HorizontalAlignment="Right"  Name="ExitBtn" Click="ExitBtn_Click"/>
+            <Button Content="Назад" Background="#bb0c07" HorizontalAlignment="Right"  Name="ExitBtn" Click="ExitBtn_Click"/>
         </DockPanel>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">

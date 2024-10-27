@@ -1,0 +1,50 @@
+﻿<Page x:Class="WpfApp1.Pages.Lists.EquipmentFailuresList"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp1.Pages.Lists"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="EquipmentFailuresList">
+
+    <Grid Background="#f3cc8d">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="64*"/>
+        </Grid.RowDefinitions>
+        <DockPanel Margin="0,5,0,0" VerticalAlignment="Center">
+            <TextBlock Text="История сбоев оборудования" FontSize="27" HorizontalAlignment="Left"/>
+            <Button Content="Оформить поломку" HorizontalAlignment="Right"
+                    Margin="10 0 5 0" Name="RegNewEqupFailureBtn" Click="RegNewEqupFailureBtn_Click"/>
+            <Button Content="Назад" HorizontalAlignment="Right" Background="#bb0c07" 
+                    Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
+        </DockPanel>
+        <DockPanel Grid.Row="1" VerticalAlignment="Center">
+            <TextBlock Text="ID" Margin="0 0 5 0"/>
+            <TextBlock Text="Оборудование" Margin="0 0 10 0"/>
+            <TextBlock Text="Причина поломки" Margin="0 0 15 0"/>
+            <TextBlock Text="Дата поломки" Margin="0 0 15 0"/>
+            <TextBlock Text="Дата починки"/>
+        </DockPanel>
+        <Border Grid.Row="2" BorderBrush="Black" BorderThickness="1">
+            <ListBox Name="EquipFailuresList" Background="#f3cc8d" IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <ListBoxItem Margin="3">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding FailureID}" Margin="5"/>
+                                <TextBlock Text="{Binding Equipments.EquipName}" Margin="5"/>
+                                <TextBlock Text="{Binding FailureReasons.ReasonName}" Margin="5"/>
+                                <TextBlock Text="{Binding FailureDate}" Margin="5"/>
+                                <DatePicker SelectedDate="{Binding FixDate}" LostFocus="FixDateDP_LostFocus" Name="FixDateDP" Margin="5"/>
+                            </StackPanel>
+                        </ListBoxItem>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+
+    </Grid>
+</Page>
