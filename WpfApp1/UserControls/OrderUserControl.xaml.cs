@@ -15,6 +15,7 @@ using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Database;
+using WpfApp1.Pages;
 using WpfApp1.Pages.Lists;
 
 namespace WpfApp1.UserControls
@@ -69,6 +70,8 @@ namespace WpfApp1.UserControls
                     SendToControlBtn.Visibility = Visibility.Visible;
                 if (_order.StatusID == 7)
                     ConfirmOrderReadinessBtn.Visibility = Visibility.Visible;
+                if (!App.DB.QualityChecks.Any(x => x.OrderID == _order.OrderID) && _order.StatusID == 7)
+                    OrderQualityChecksBtn.Visibility = Visibility.Visible;
             }
 
         }
@@ -91,8 +94,20 @@ namespace WpfApp1.UserControls
         private void ChangeOrderStatus(int statusNumber)
         {
             _order.StatusID = statusNumber;
+            CreateHistoryRecord(statusNumber);
             App.DB.SaveChanges();
             MainWindow.Instance.Navigate(new OrdersPage());
+        }
+
+        private void CreateHistoryRecord(int statusNumber)
+        {
+            OrderStatusHistory orderStatusHistory = new OrderStatusHistory
+            {
+                OrderID = _order.OrderID,
+                StatusID = statusNumber,
+                ChangeDate = DateTime.Now,
+            };
+            App.DB.OrderStatusHistory.Add(orderStatusHistory);
         }
 
         private void DeductionOfComponentMaterials()
@@ -158,5 +173,9 @@ namespace WpfApp1.UserControls
         private void ConfirmOrderReadinessBtn_Click(object sender, RoutedEventArgs e) =>
             ChangeOrderStatus(8);
 
+        private void OrderQualityChecksBtn_Click(object sender, RoutedEventArgs e) =>
+        MainWindow.Instance.Navigate(new QualityChecksOrderPage(_order));
+
+        
     }
 }

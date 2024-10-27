@@ -59,6 +59,10 @@
                         Click="CloseOrderBtn_Click">
                     <TextBlock Text="Закрыть заказ" TextWrapping="Wrap" TextAlignment="Center" FontSize="14"/>
                 </Button>
+                <Button x:Name="OrderQualityChecksBtn" Background="#4867ac" Visibility="Collapsed"
+                        Click="OrderQualityChecksBtn_Click">
+                    <TextBlock Text="Провести оценку" TextWrapping="Wrap" TextAlignment="Center" FontSize="14"/>
+                </Button>
                 <Button x:Name="ConfirmOrderBtn" Background="#4867ac" Visibility="Collapsed"
                         Click="ConfirmOrderBtn_Click">
                     <TextBlock Text="Подтвердить заказ" TextWrapping="Wrap" TextAlignment="Center" FontSize="14"/>
