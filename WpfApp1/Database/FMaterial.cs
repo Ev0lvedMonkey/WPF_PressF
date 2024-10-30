@@ -30,12 +30,10 @@ namespace WpfApp1.Database
         public int MaterialTypeID { get; set; }
         public Nullable<decimal> Weight { get; set; }
         public string GOST { get; set; }
-        public Nullable<int> SupplierID { get; set; }
         public Nullable<int> WarehouseID { get; set; }
     
         public virtual MaterialsType MaterialsType { get; set; }
         public virtual UnitType UnitType { get; set; }
-        public virtual Suppliers Suppliers { get; set; }
         public virtual Warehouses Warehouses { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderSpecifications> OrderSpecifications { get; set; }

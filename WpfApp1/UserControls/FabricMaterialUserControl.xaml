@@ -29,33 +29,34 @@
                              Style="{StaticResource SimpleTB}" IsReadOnly="True" 
                              PreviewTextInput="TB_PreviewTextInput"/>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Цена : "/>
-                    <TextBox x:Name="MaterialPriceTB" Text="1000" LostFocus="MaterialPriceTB_LostFocus"
-                             Style="{StaticResource SimpleTB}" IsReadOnly="True"
-                             PreviewTextInput="TB_PreviewTextInput"/>
-                    <TextBlock Text="р за: "/>
-                    <TextBlock x:Name="MaterialTypeTB" Text="шт"/>
-                </StackPanel>
             </DockPanel>
-            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="2" Grid.Row="2">
-                <Image x:Name="MaterialImage"/>
-            </Border>
-            <StackPanel  Grid.Column="3" Grid.Row="1" Margin="5 5 0 0" VerticalAlignment="Bottom" >
-                <StackPanel Orientation="Horizontal">
-                    <TextBlock Text="Материала сделан по : "/>
-                    <TextBox x:Name="MaterialGHOSTTB" Text="ГОСТ - 1234" LostFocus="MaterialGHOSTTB_LostFocus"
+            <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" Grid.Row="2">
+                <DockPanel Margin="5 5 0 0" VerticalAlignment="Bottom" >
+                    <StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Материала сделан по : "/>
+                            <TextBox x:Name="MaterialGHOSTTB" Text="ГОСТ - 1234" LostFocus="MaterialGHOSTTB_LostFocus"
                              Style="{StaticResource SimpleTB}" IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
-                    <TextBlock Text="Вес материала за еденицу : "/>
-                    <TextBox x:Name="MaterialMassTB" Text="0.045" LostFocus="MaterialMassTB_LostFocus"
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                            <TextBlock Text="Вес материала за еденицу : "/>
+                            <TextBox x:Name="MaterialMassTB" Text="0.045" LostFocus="MaterialMassTB_LostFocus"
                              Style="{StaticResource SimpleTB}" IsReadOnly="True"
                              PreviewTextInput="TB_PreviewTextInput"/>
-                </StackPanel>
-            </StackPanel>
-            <StackPanel  Grid.Column="3" Grid.Row="1" Margin="5 5 0 0" VerticalAlignment="Top" HorizontalAlignment="Right" >
-                <StackPanel Orientation="Horizontal" Margin="0 5 0 0">
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel VerticalAlignment="Center" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <TextBlock Text="Цена : "/>
+                        <TextBox x:Name="MaterialPriceTB" Text="1000" LostFocus="MaterialPriceTB_LostFocus"
+                             Style="{StaticResource SimpleTB}" IsReadOnly="True"
+                             PreviewTextInput="TB_PreviewTextInput"/>
+                        <TextBlock Text="р за: "/>
+                        <TextBlock x:Name="MaterialTypeTB" Text="шт"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+            <StackPanel  Grid.Column="3" Grid.Row="0" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Right" >
+                <StackPanel Orientation="Horizontal" >
                     <TextBlock Text="Цех: "/>
                     <TextBlock x:Name="WarehousesTB" Text="Первый"/>
                 </StackPanel>

@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="Хранилище FactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="Хранилище FactoryModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="ComponentsType">
           <Key>
             <PropertyRef Name="ID" />
@@ -71,7 +71,6 @@
           <Property Name="MaterialTypeID" Type="int" Nullable="false" />
           <Property Name="Weight" Type="decimal" Precision="5" Scale="2" />
           <Property Name="GOST" Type="nvarchar" MaxLength="100" />
-          <Property Name="SupplierID" Type="int" />
           <Property Name="WarehouseID" Type="int" />
         </EntityType>
         <EntityType Name="MaterialsType">
@@ -94,7 +93,6 @@
           <Property Name="UnitTypeID" Type="int" />
           <Property Name="ComponentTypeID" Type="int" />
           <Property Name="Price" Type="decimal" Precision="4" Scale="1" />
-          <Property Name="SupplierID" Type="int" />
           <Property Name="WarehouseID" Type="int" />
         </EntityType>
         <EntityType Name="Operations">
@@ -145,13 +143,6 @@
           <Property Name="StatusID" Type="int" Nullable="false" />
           <Property Name="ChangeDate" Type="datetime" />
         </EntityType>
-        <EntityType Name="ProductionStages">
-          <Key>
-            <PropertyRef Name="StageID" />
-          </Key>
-          <Property Name="StageID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="StageName" Type="nvarchar" MaxLength="100" Nullable="false" />
-        </EntityType>
         <EntityType Name="QualityChecks">
           <Key>
             <PropertyRef Name="CheckID" />
@@ -176,14 +167,6 @@
           </Key>
           <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleName" Type="nvarchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Suppliers">
-          <Key>
-            <PropertyRef Name="SupplierID" />
-          </Key>
-          <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="SupplierName" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="ContactInfo" Type="nvarchar" MaxLength="200" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -231,18 +214,6 @@
           <Property Name="WarehouseName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="200" />
         </EntityType>
-        <Association Name="FK_Components_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="MComponents" Type="Self.MComponents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="MComponents">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Components_Warehouses">
           <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
           <End Role="MComponents" Type="Self.MComponents" Multiplicity="*" />
@@ -336,18 +307,6 @@
             </Principal>
             <Dependent Role="FMaterial">
               <PropertyRef Name="UnitTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Materials_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="FMaterial" Type="Self.FMaterial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="FMaterial">
-              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -546,20 +505,14 @@
           <EntitySet Name="OrderSpecifications" EntityType="Self.OrderSpecifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderStatusHistory" EntityType="Self.OrderStatusHistory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProductionStages" EntityType="Self.ProductionStages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QualityChecks" EntityType="Self.QualityChecks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="QualityParameters" EntityType="Self.QualityParameters" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UnitType" EntityType="Self.UnitType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserImage" EntityType="Self.UserImage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Warehouses" EntityType="Self.Warehouses" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Components_Suppliers" Association="Self.FK_Components_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="MComponents" EntitySet="MComponents" />
-          </AssociationSet>
           <AssociationSet Name="FK_Components_Warehouses" Association="Self.FK_Components_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="MComponents" EntitySet="MComponents" />
@@ -590,10 +543,6 @@
           </AssociationSet>
           <AssociationSet Name="FK_FMaterial_UnitType" Association="Self.FK_FMaterial_UnitType">
             <End Role="UnitType" EntitySet="UnitType" />
-            <End Role="FMaterial" EntitySet="FMaterial" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Materials_Suppliers" Association="Self.FK_Materials_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
             <End Role="FMaterial" EntitySet="FMaterial" />
           </AssociationSet>
           <AssociationSet Name="FK_Materials_Warehouses" Association="Self.FK_Materials_Warehouses">
@@ -657,7 +606,8 @@
             <End Role="User" EntitySet="User" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FactoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -701,10 +651,10 @@
           <Property Name="FailureReasonID" Type="Int32" Nullable="false" />
           <Property Name="FailureDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="MasterID" Type="Int32" Nullable="false" />
+          <Property Name="FixDate" Type="DateTime" Precision="3" />
           <NavigationProperty Name="Equipments" Relationship="Self.FK_EquipmentFailures_Equipment" FromRole="EquipmentFailures" ToRole="Equipments" />
           <NavigationProperty Name="User" Relationship="Self.FK_EquipmentFailures_Master" FromRole="EquipmentFailures" ToRole="User" />
           <NavigationProperty Name="FailureReasons" Relationship="Self.FK_EquipmentFailures_Reason" FromRole="EquipmentFailures" ToRole="FailureReasons" />
-          <Property Name="FixDate" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="Equipments">
           <Key>
@@ -736,11 +686,9 @@
           <Property Name="MaterialTypeID" Type="Int32" Nullable="false" />
           <Property Name="Weight" Type="Decimal" Precision="5" Scale="2" />
           <Property Name="GOST" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="SupplierID" Type="Int32" />
           <Property Name="WarehouseID" Type="Int32" />
           <NavigationProperty Name="MaterialsType" Relationship="Self.FK_FMaterial_MaterialsType" FromRole="FMaterial" ToRole="MaterialsType" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_FMaterial_UnitType" FromRole="FMaterial" ToRole="UnitType" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK_Materials_Suppliers" FromRole="FMaterial" ToRole="Suppliers" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Materials_Warehouses" FromRole="FMaterial" ToRole="Warehouses" />
           <NavigationProperty Name="OrderSpecifications" Relationship="Self.FK_Specifications_Materials" FromRole="FMaterial" ToRole="OrderSpecifications" />
         </EntityType>
@@ -765,10 +713,8 @@
           <Property Name="UnitTypeID" Type="Int32" />
           <Property Name="ComponentTypeID" Type="Int32" />
           <Property Name="Price" Type="Decimal" Precision="4" Scale="1" />
-          <Property Name="SupplierID" Type="Int32" />
           <Property Name="WarehouseID" Type="Int32" />
           <NavigationProperty Name="ComponentsType" Relationship="Self.FK_MComponents_ComponentsType" FromRole="MComponents" ToRole="ComponentsType" />
-          <NavigationProperty Name="Suppliers" Relationship="Self.FK_Components_Suppliers" FromRole="MComponents" ToRole="Suppliers" />
           <NavigationProperty Name="Warehouses" Relationship="Self.FK_Components_Warehouses" FromRole="MComponents" ToRole="Warehouses" />
           <NavigationProperty Name="UnitType" Relationship="Self.FK_MComponents_UnitType" FromRole="MComponents" ToRole="UnitType" />
           <NavigationProperty Name="OrderSpecifications" Relationship="Self.FK_Specifications_Components" FromRole="MComponents" ToRole="OrderSpecifications" />
@@ -835,13 +781,6 @@
           <NavigationProperty Name="Order" Relationship="Self.FK_OrderStatusHistory_Order" FromRole="OrderStatusHistory" ToRole="Order" />
           <NavigationProperty Name="OrderStatus" Relationship="Self.FK_OrderStatusHistory_Status" FromRole="OrderStatusHistory" ToRole="OrderStatus" />
         </EntityType>
-        <EntityType Name="ProductionStages">
-          <Key>
-            <PropertyRef Name="StageID" />
-          </Key>
-          <Property Name="StageID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="StageName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-        </EntityType>
         <EntityType Name="QualityChecks">
           <Key>
             <PropertyRef Name="CheckID" />
@@ -870,16 +809,6 @@
           <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="Self.FK_Users_Roles" FromRole="Role" ToRole="User" />
-        </EntityType>
-        <EntityType Name="Suppliers">
-          <Key>
-            <PropertyRef Name="SupplierID" />
-          </Key>
-          <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="SupplierName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="ContactInfo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="FMaterial" Relationship="Self.FK_Materials_Suppliers" FromRole="Suppliers" ToRole="FMaterial" />
-          <NavigationProperty Name="MComponents" Relationship="Self.FK_Components_Suppliers" FromRole="Suppliers" ToRole="MComponents" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -1033,18 +962,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Materials_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="FMaterial" Type="Self.FMaterial" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="FMaterial">
-              <PropertyRef Name="SupplierID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Materials_Warehouses">
           <End Role="Warehouses" Type="Self.Warehouses" Multiplicity="0..1" />
           <End Role="FMaterial" Type="Self.FMaterial" Multiplicity="*" />
@@ -1066,18 +983,6 @@
             </Principal>
             <Dependent Role="OrderSpecifications">
               <PropertyRef Name="MaterialID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Components_Suppliers">
-          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="0..1" />
-          <End Role="MComponents" Type="Self.MComponents" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Suppliers">
-              <PropertyRef Name="SupplierID" />
-            </Principal>
-            <Dependent Role="MComponents">
-              <PropertyRef Name="SupplierID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1237,7 +1142,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="FactoryDataBaseEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="FactoryEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="ComponentsType" EntityType="Self.ComponentsType" />
           <EntitySet Name="EmployeeOperations" EntityType="Self.EmployeeOperations" />
           <EntitySet Name="Employees" EntityType="Self.Employees" />
@@ -1252,11 +1157,9 @@
           <EntitySet Name="OrderSpecifications" EntityType="Self.OrderSpecifications" />
           <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" />
           <EntitySet Name="OrderStatusHistory" EntityType="Self.OrderStatusHistory" />
-          <EntitySet Name="ProductionStages" EntityType="Self.ProductionStages" />
           <EntitySet Name="QualityChecks" EntityType="Self.QualityChecks" />
           <EntitySet Name="QualityParameters" EntityType="Self.QualityParameters" />
           <EntitySet Name="Role" EntityType="Self.Role" />
-          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <EntitySet Name="UnitType" EntityType="Self.UnitType" />
           <EntitySet Name="User" EntityType="Self.User" />
@@ -1294,10 +1197,6 @@
             <End Role="UnitType" EntitySet="UnitType" />
             <End Role="FMaterial" EntitySet="FMaterial" />
           </AssociationSet>
-          <AssociationSet Name="FK_Materials_Suppliers" Association="Self.FK_Materials_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="FMaterial" EntitySet="FMaterial" />
-          </AssociationSet>
           <AssociationSet Name="FK_Materials_Warehouses" Association="Self.FK_Materials_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
             <End Role="FMaterial" EntitySet="FMaterial" />
@@ -1305,10 +1204,6 @@
           <AssociationSet Name="FK_Specifications_Materials" Association="Self.FK_Specifications_Materials">
             <End Role="FMaterial" EntitySet="FMaterial" />
             <End Role="OrderSpecifications" EntitySet="OrderSpecifications" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Components_Suppliers" Association="Self.FK_Components_Suppliers">
-            <End Role="Suppliers" EntitySet="Suppliers" />
-            <End Role="MComponents" EntitySet="MComponents" />
           </AssociationSet>
           <AssociationSet Name="FK_Components_Warehouses" Association="Self.FK_Components_Warehouses">
             <End Role="Warehouses" EntitySet="Warehouses" />
@@ -1368,7 +1263,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Хранилище FactoryModelContainer" CdmEntityContainer="FactoryDataBaseEntities">
+        <EntityContainerMapping StorageEntityContainer="Хранилище FactoryModelContainer" CdmEntityContainer="FactoryEntities1">
           <EntitySetMapping Name="ComponentsType">
             <EntityTypeMapping TypeName="FactoryModel.ComponentsType">
               <MappingFragment StoreEntitySet="ComponentsType">
@@ -1401,12 +1296,12 @@
           <EntitySetMapping Name="EquipmentFailures">
             <EntityTypeMapping TypeName="FactoryModel.EquipmentFailures">
               <MappingFragment StoreEntitySet="EquipmentFailures">
-                <ScalarProperty Name="FixDate" ColumnName="FixDate" />
                 <ScalarProperty Name="FailureID" ColumnName="FailureID" />
                 <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
                 <ScalarProperty Name="FailureReasonID" ColumnName="FailureReasonID" />
                 <ScalarProperty Name="FailureDate" ColumnName="FailureDate" />
                 <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="FixDate" ColumnName="FixDate" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1439,7 +1334,6 @@
                 <ScalarProperty Name="MaterialTypeID" ColumnName="MaterialTypeID" />
                 <ScalarProperty Name="Weight" ColumnName="Weight" />
                 <ScalarProperty Name="GOST" ColumnName="GOST" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1464,7 +1358,6 @@
                 <ScalarProperty Name="UnitTypeID" ColumnName="UnitTypeID" />
                 <ScalarProperty Name="ComponentTypeID" ColumnName="ComponentTypeID" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
                 <ScalarProperty Name="WarehouseID" ColumnName="WarehouseID" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1522,14 +1415,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProductionStages">
-            <EntityTypeMapping TypeName="FactoryModel.ProductionStages">
-              <MappingFragment StoreEntitySet="ProductionStages">
-                <ScalarProperty Name="StageID" ColumnName="StageID" />
-                <ScalarProperty Name="StageName" ColumnName="StageName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="QualityChecks">
             <EntityTypeMapping TypeName="FactoryModel.QualityChecks">
               <MappingFragment StoreEntitySet="QualityChecks">
@@ -1555,15 +1440,6 @@
               <MappingFragment StoreEntitySet="Role">
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="RoleName" ColumnName="RoleName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Suppliers">
-            <EntityTypeMapping TypeName="FactoryModel.Suppliers">
-              <MappingFragment StoreEntitySet="Suppliers">
-                <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
-                <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
-                <ScalarProperty Name="ContactInfo" ColumnName="ContactInfo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

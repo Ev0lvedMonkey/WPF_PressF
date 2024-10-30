@@ -25,8 +25,8 @@
                 <ComboBoxItem Content="Третий цех"/>
             </ComboBox>
             <Button x:Name="SaveBtn" Content="Сохранить" Margin="3" Click="SaveButton_Click"/>
-            <Button x:Name="ResetBtn"  Content="Сборсить" Margin="3" Click="ResetButton_Click"/>
-            <Button x:Name="ExitBtn"  Content="Выйти" Margin="3" Click="ExitBtn_Click"/>
+            <Button x:Name="ResetBtn"  Content="Сборсить" Margin="3" Click="ResetBtn_Click"/>
+            <Button x:Name="ExitBtn"  Content="Выйти" Margin="3" Click="ExitBtn_Click" Background="#bb0c07"/>
             <Button x:Name="ShowDeafaultWarehousesLayoutBtn" HorizontalAlignment="Right" Content="Станадартный шаблон" Click="ShowDeafaultWarehousesLayoutBtn_Click"/>
         </DockPanel>
         <StackPanel Grid.Row="2" Grid.Column="1">

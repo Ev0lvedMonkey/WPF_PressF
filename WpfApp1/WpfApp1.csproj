@@ -121,9 +121,6 @@
     <Compile Include="Database\OrderStatusHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\ProductionStages.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\QualityChecks.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -131,9 +128,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Database\Suppliers.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagrams.cs">

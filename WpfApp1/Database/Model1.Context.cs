@@ -13,10 +13,10 @@ namespace WpfApp1.Database
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FactoryDataBaseEntities : DbContext
+    public partial class FactoryEntities1 : DbContext
     {
-        public FactoryDataBaseEntities()
-            : base("name=FactoryDataBaseEntities")
+        public FactoryEntities1()
+            : base("name=FactoryEntities1")
         {
         }
     
@@ -39,11 +39,9 @@ namespace WpfApp1.Database
         public virtual DbSet<OrderSpecifications> OrderSpecifications { get; set; }
         public virtual DbSet<OrderStatus> OrderStatus { get; set; }
         public virtual DbSet<OrderStatusHistory> OrderStatusHistory { get; set; }
-        public virtual DbSet<ProductionStages> ProductionStages { get; set; }
         public virtual DbSet<QualityChecks> QualityChecks { get; set; }
         public virtual DbSet<QualityParameters> QualityParameters { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<Suppliers> Suppliers { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<UnitType> UnitType { get; set; }
         public virtual DbSet<User> User { get; set; }

@@ -29,11 +29,9 @@ namespace WpfApp1.Database
         public Nullable<int> UnitTypeID { get; set; }
         public Nullable<int> ComponentTypeID { get; set; }
         public Nullable<decimal> Price { get; set; }
-        public Nullable<int> SupplierID { get; set; }
         public Nullable<int> WarehouseID { get; set; }
     
         public virtual ComponentsType ComponentsType { get; set; }
-        public virtual Suppliers Suppliers { get; set; }
         public virtual Warehouses Warehouses { get; set; }
         public virtual UnitType UnitType { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
