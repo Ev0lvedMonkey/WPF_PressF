@@ -69,7 +69,7 @@ namespace WpfApp1
 
         public static Page GetRightPage()
         {
-            switch (CurrentUser.UserID)
+            switch (CurrentUser.RoleID)
             {
                 case 1:
                     return new DirectorPage();

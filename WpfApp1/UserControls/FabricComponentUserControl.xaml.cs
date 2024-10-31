@@ -11,6 +11,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Media.Media3D;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Database;
@@ -79,20 +80,45 @@ namespace WpfApp1.UserControls
 
         private void CompCountTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _component.Quantity = int.Parse(CompCountTB.Text);
-            App.DB.SaveChanges();
+            if (int.TryParse(CompCountTB.Text, out int result))
+            {
+                _component.Quantity = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных количества");
+                return;
+            }
+
         }
 
         private void CompMassTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _component.Weight = decimal.Parse(CompMassTB.Text);
-            App.DB.SaveChanges();
+            if (decimal.TryParse(CompMassTB.Text, out decimal result))
+            {
+                _component.Weight = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных массы");
+                return;
+            }
         }
 
         private void CompPriceTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _component.Price = decimal.Parse(CompPriceTB.Text);
-            App.DB.SaveChanges();
+            if (int.TryParse(CompPriceTB.Text, out int result))
+            {
+                _component.Price = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных цены");
+                return;
+            }
         }
 
         private void DelComponentBtn_Click(object sender, RoutedEventArgs e)

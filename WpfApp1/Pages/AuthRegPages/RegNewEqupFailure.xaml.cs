@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WpfApp1.Database;
+using WpfApp1.Pages.Lists;
 
 namespace WpfApp1.Pages.AuthRegPages
 {
@@ -26,9 +27,9 @@ namespace WpfApp1.Pages.AuthRegPages
         {
             InitializeComponent();
             EqupCB.ItemsSource = App.DB.Equipments.ToList();
-            EqupCB.DataContext = "EquipName";
+            EqupCB.DisplayMemberPath = "EquipName";
             ReasonCB.ItemsSource = App.DB.FailureReasons.ToList();
-            ReasonCB.DataContext = "ReasonName";
+            ReasonCB.DisplayMemberPath = "ReasonName";
         }
 
         private void EnterBtn_Click(object sender, RoutedEventArgs e)
@@ -46,14 +47,14 @@ namespace WpfApp1.Pages.AuthRegPages
                 EquipmentFailures equipmentFailures = new EquipmentFailures
                 {
                     EquipmentID = (EqupCB.SelectedItem as Equipments).EquipmentID,
-                    FailureReasonID = (EqupCB.SelectedItem as FailureReasons).FailureReasonID,
+                    FailureReasonID = (ReasonCB.SelectedItem as FailureReasons).FailureReasonID,
                     FailureDate = (DateTime)FailureDateDP.SelectedDate,
                     MasterID = App.CurrentUser.UserID,
                     FixDate = null
                 };
                 App.DB.EquipmentFailures.Add(equipmentFailures);
                 App.DB.SaveChanges();
-                NavigationService.Navigate(new RegNewEqupFailure());
+                NavigationService.Navigate(new EquipmentFailuresList());
             }
         }
 

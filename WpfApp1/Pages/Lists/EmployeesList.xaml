@@ -15,13 +15,13 @@
         </Grid.RowDefinitions>
         <DockPanel Margin="0,5,0,0" VerticalAlignment="Center">
             <TextBlock Text="Список работников" FontSize="27" HorizontalAlignment="Left"/>
-            <Button Content="Назад" HorizontalAlignment="Right" Background="#bb0c07" Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
+            <Button Content="Назад" HorizontalAlignment="Right" Background="#bb0c07"
+                    Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
         </DockPanel>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
             <ScrollViewer HorizontalScrollBarVisibility="Disabled">
                 <WrapPanel Name="EmployeesWP" ItemHeight="250" ItemWidth="600"/>
             </ScrollViewer>
         </Border>
-
     </Grid>
 </Page>

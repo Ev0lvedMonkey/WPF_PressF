@@ -22,18 +22,16 @@ namespace WpfApp1.Pages.Lists
     /// </summary>
     public partial class EmployeesList : Page
     {
-        public EmployeesList()
-        {
+        public EmployeesList(){
             InitializeComponent();
-            UpdateEmployeesList();
-        }
+            UpdateEmployeesList();}
 
-        private void UpdateEmployeesList()
-        {
+        private void UpdateEmployeesList(){
             EmployeesWP.Children?.Clear();
-            foreach (Employees employee in App.DB.Employees.OrderByDescending(x => x.ExperienceYears))
-                EmployeesWP.Children.Add(new EmployeeUserControl(employee));
-        }
+            List<Employees> employees =
+                App.DB.Employees.OrderByDescending(x => x.ExperienceYears).ToList();
+            foreach (Employees employee in employees)
+                EmployeesWP.Children.Add(new EmployeeUserControl(employee));}
 
         private void ExitBtn_Click(object sender, RoutedEventArgs e) =>
             NavigationService.Navigate(App.GetRightPage());

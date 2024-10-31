@@ -149,7 +149,7 @@ namespace WpfApp1.Pages
                         double left = Canvas.GetLeft(image);
                         double top = Canvas.GetTop(image);
 
-                        string sourcePath;
+                        string sourcePath = "";
 
                         if (image.Source is BitmapImage bitmapImage)
                         {
@@ -157,12 +157,18 @@ namespace WpfApp1.Pages
                                 ? bitmapImage.UriSource.AbsolutePath
                                 : bitmapImage.UriSource.ToString();
                         }
-                        else
+                        else if (image.Source is BitmapSource bitmapSource && bitmapSource is BitmapFrame frame)
                         {
-                            continue; 
+                            if (frame.Decoder.Frames.Count > 0)
+                            {
+                                sourcePath = frame.Decoder.Frames[0].ToString();
+                            }
                         }
 
-                        writer.WriteLine($"{sourcePath}|{left}|{top}");
+                        if (!string.IsNullOrEmpty(sourcePath))
+                        {
+                            writer.WriteLine($"{sourcePath}|{left}|{top}");
+                        }
                     }
                 }
             }
@@ -192,7 +198,7 @@ namespace WpfApp1.Pages
 
                         Image image = new Image
                         {
-                            Source = new BitmapImage(new Uri(imagePath, UriKind.Relative)),
+                            Source = new BitmapImage(new Uri(imagePath, UriKind.Absolute)),
                             Width = 40,
                             Height = 40,
                         };
@@ -210,7 +216,7 @@ namespace WpfApp1.Pages
             ResetCanvasChildren();
 
             int warehouseIndex = WarehousesCB.SelectedIndex;
-            if (warehouseIndex > 0) 
+            if (warehouseIndex > 0)
             {
                 string filePath = GetFilePathForWarehouse(warehouseIndex);
                 if (File.Exists(filePath))

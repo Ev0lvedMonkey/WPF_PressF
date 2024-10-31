@@ -74,15 +74,32 @@ namespace WpfApp1.UserControls
 
         private void MaterialCountTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _material.Quantity = int.Parse(MaterialMassTB.Text);
-            App.DB.SaveChanges();
+            if (int.TryParse(MaterialCountTB.Text, out int result))
+            {
+                _material.Quantity = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных количества");
+                return;
+            }
 
         }
 
         private void MaterialMassTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _material.Weight = decimal.Parse(MaterialMassTB.Text);
-            App.DB.SaveChanges();
+            if (decimal.TryParse(MaterialMassTB.Text, out decimal result))
+            {
+                _material.Weight = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных массы");
+                return;
+            }
+
         }
 
         private void MaterialGHOSTTB_LostFocus(object sender, RoutedEventArgs e)
@@ -94,8 +111,16 @@ namespace WpfApp1.UserControls
 
         private void MaterialPriceTB_LostFocus(object sender, RoutedEventArgs e)
         {
-            _material.Price = int.Parse(MaterialPriceTB.Text);
-            App.DB.SaveChanges();
+            if (int.TryParse(MaterialPriceTB.Text, out int result))
+            {
+                _material.Price = result;
+                App.DB.SaveChanges();
+            }
+            else
+            {
+                MessageBox.Show("Неверный формат данных цены");
+                return;
+            }
         }
 
         private void DelMaterialBtn_Click(object sender, RoutedEventArgs e)

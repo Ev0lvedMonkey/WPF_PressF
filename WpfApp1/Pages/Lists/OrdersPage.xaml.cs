@@ -29,7 +29,7 @@ namespace WpfApp1.Pages.Lists
         {
             InitializeComponent();
             CheckRole();
-            UpdateEmployeesList();
+            UpdateOrdersList();
         }
 
         private void CheckRole()
@@ -52,7 +52,7 @@ namespace WpfApp1.Pages.Lists
                 _order = App.DB.Order.Where(x => x.StatusID == 6 || x.StatusID == 7).ToList();
         }
 
-        private void UpdateEmployeesList()
+        private void UpdateOrdersList()
         {
             OrdersWP.Children?.Clear();
             foreach (Order order in _order)

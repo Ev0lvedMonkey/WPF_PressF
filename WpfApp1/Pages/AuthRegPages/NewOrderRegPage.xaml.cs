@@ -64,7 +64,7 @@ namespace WpfApp1.Pages.AuthRegPages
             }
             else
                 CreateNewOrder();
-            NavigationService.GoBack();
+            NavigationService.Navigate(App.GetRightPage());
         }
 
         private void CreateNewOrder()

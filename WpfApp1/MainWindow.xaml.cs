@@ -19,42 +19,33 @@ namespace WpfApp1
                 Instance = this;
             else
                 return;
-
-            if (App.CurrentUser != null)
-            {
+            if (App.CurrentUser != null){
                 MainFrame.NavigationService.Navigate(App.GetRightPage());
-                return;
-            }
-
+                return;}
             MainFrame.NavigationService.Navigate(new AuthPage());
         }
 
-        public void OpenComponets()
-        {
+        public void OpenComponets(){
             ExitBtn.Visibility = Visibility.Visible;
-            UserFullNameText.Visibility = Visibility.Visible;
-        }
+            UserFullNameText.Visibility = Visibility.Visible;}
 
-        public void HideComponets()
-        {
+        public void HideComponets(){
             ExitBtn.Visibility = Visibility.Hidden;
-            UserFullNameText.Visibility = Visibility.Hidden;
-        }
+            UserFullNameText.Visibility = Visibility.Hidden;}
 
-        public void SetUserFullName()
-        {
-            string userRole = App.DB.Role.FirstOrDefault(x => x.RoleID == App.CurrentUser.RoleID).RoleName;
+        public void SetUserFullName(){
+            string userRole =
+                App.DB.Role.FirstOrDefault(x => x.RoleID == App.CurrentUser.RoleID).RoleName;
             string userFullName =
-                $"{userRole} {App.CurrentUser.LastName} {App.CurrentUser.FirstName} {App.CurrentUser.Patronymic}";;
-            UserFullNameText.Text = userFullName;
-        }
+                $"{userRole}" +
+                $" {App.CurrentUser.LastName} " +
+                $"{App.CurrentUser.FirstName} {App.CurrentUser.Patronymic}";;
+            UserFullNameText.Text = userFullName;}
 
         public void Navigate(Page page) => MainFrame.NavigationService.Navigate(page);
 
-        private void ExitBtn_Click(object sender, RoutedEventArgs e)
-        {
+        private void ExitBtn_Click(object sender, RoutedEventArgs e){
             MainFrame.NavigationService.Navigate(new AuthPage());
-            App.ClearUserSettings();
-        }
+            App.ClearUserSettings();}
     }
 }

@@ -14,7 +14,7 @@
             <RowDefinition Height="23*"/>
         </Grid.RowDefinitions>
         <DockPanel Margin="0,5,0,0" VerticalAlignment="Center">
-            <TextBlock Text="Список работников" FontSize="27" HorizontalAlignment="Left"/>
+            <TextBlock Text="Оценка заказа" FontSize="27" HorizontalAlignment="Left"/>
             <Button Content="Сохранить" HorizontalAlignment="Right" Margin="15 0 5 0" Name="SaveExitBtn" Click="SaveExitBtn_Click"/>
             <Button Content="Назад" HorizontalAlignment="Right" Background="#bb0c07" Margin="0 0 5 0" Name="ExitBtn" Click="ExitBtn_Click"/>
         </DockPanel>

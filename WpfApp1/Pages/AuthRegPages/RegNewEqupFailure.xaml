@@ -26,7 +26,7 @@
                 <DatePicker x:Name="FailureDateDP"  Width="180"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="7">
-                <Button x:Name="EnterBtn" Width="180" Content="Зарегистрироваться"
+                <Button x:Name="EnterBtn" Width="180" Content="Зарегистрировать"
                  Click="EnterBtn_Click"/>
                 <Button x:Name="ExitBtn" Content="Выйти" Margin="5" Background="#bb0c07"
                         Click="ExitBtn_Click"/>

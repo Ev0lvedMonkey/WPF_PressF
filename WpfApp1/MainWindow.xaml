@@ -14,12 +14,12 @@
         </Grid.RowDefinitions>
         <Frame x:Name="MainFrame"  NavigationUIVisibility="Hidden"/>
         <Border Grid.Row="1" BorderBrush="Black" BorderThickness="1">
-
             <DockPanel>
                 <Button Grid.Row="1" Content="Выйти" HorizontalAlignment="Left" VerticalAlignment="Bottom"
                 FontSize="18" FontWeight="Medium" Margin="0,0,0,3" Click="ExitBtn_Click" Name="ExitBtn"
                 Background="#4867ac" Foreground="White"/>
-                <TextBlock Grid.Row="1" Name="UserFullNameText" HorizontalAlignment="Right" VerticalAlignment="Center"
+                <TextBlock Grid.Row="1" Name="UserFullNameText"
+                           HorizontalAlignment="Right" VerticalAlignment="Center"
                 FontSize="18" FontWeight="Medium"/>
             </DockPanel>
         </Border>
